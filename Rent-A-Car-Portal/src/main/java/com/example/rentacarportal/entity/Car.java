@@ -1,9 +1,11 @@
 package com.example.rentacarportal.entity;
 
 import com.example.rentacarportal.common.CarType;
+import com.example.rentacarportal.repository.RentReservationRepository;
 import com.sun.istack.NotNull;
 import lombok.*;
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.List;
 
 
@@ -36,6 +38,9 @@ public class Car extends BaseEntity {
     @OneToMany(mappedBy = "car", cascade = CascadeType.ALL)
     private List<DailyPriceByDateRange> priceRangesByDateRange;
 
+    public boolean isCarAvailable(RentReservationRepository repository, LocalDate startDate, LocalDate endDate){
+        return repository.findAllByStartDateBetweenAndCar(startDate, endDate, this).isEmpty();
+    }
 
 
 }

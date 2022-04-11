@@ -1,10 +1,12 @@
-package com.example.rentacarportal.controller;
+package com.example.rentacarportal.service;
 
 import com.example.rentacarportal.entity.User;
 import com.example.rentacarportal.message.MessageResponse;
 import com.example.rentacarportal.message.MessageType;
 import com.example.rentacarportal.repository.UserRepository;
 import org.springframework.stereotype.Service;
+
+import javax.persistence.EntityNotFoundException;
 
 @Service
 public class UserService {
@@ -17,7 +19,7 @@ public class UserService {
 
     public MessageResponse addUser(User user) {
         userRepository.save(user);
-        return new MessageResponse(MessageType.SUCCESS,"User is added");
+        return new MessageResponse(MessageType.SUCCESS, "User is added");
     }
 
     public User getUserById(Long id) {
@@ -25,6 +27,6 @@ public class UserService {
     }
 
     public User getUserByUsername(String userName) {
-        return userRepository.findBy
+        return userRepository.findByUsername(userName).orElseThrow(() -> new EntityNotFoundException("User is not found by given username"));
     }
 }

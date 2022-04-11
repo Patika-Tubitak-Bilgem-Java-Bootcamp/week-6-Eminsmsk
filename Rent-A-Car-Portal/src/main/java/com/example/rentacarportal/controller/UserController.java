@@ -1,9 +1,8 @@
 package com.example.rentacarportal.controller;
 
-import com.example.rentacarportal.entity.Company;
 import com.example.rentacarportal.entity.User;
 import com.example.rentacarportal.message.MessageResponse;
-import com.example.rentacarportal.service.CompanyService;
+import com.example.rentacarportal.service.UserService;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
